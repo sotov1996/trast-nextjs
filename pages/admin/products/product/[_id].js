@@ -83,7 +83,7 @@ export default Product;
 
 export async function getServerSideProps({ params }) {
     const dev = process.env.NODE_ENV !== "production"
-  const api = dev ? "http://localhost:3000" : 'https://desolate-wildwood-83661.herokuapp.com'
+  const api = dev ? "http://localhost:3000" : 'https://trast-nextjs.herokuapp.com'
     const response = await fetch(`${api}/api/product/${params._id}`)
     const product = await response.json()
 
