@@ -1,0 +1,92 @@
+import React from "react";
+import { useRouter } from "next/router"
+import { makeStyles } from "@material-ui/core/styles";
+import Admin from "layouts/Admin.js";
+import GridItem from "components/Grid/GridItem.js";
+import GridContainer from "components/Grid/GridContainer.js";
+import Card from "components/Card/Card.js";
+import CardHeader from "components/Card/CardHeader.js";
+import image from "../../../assets/img/sidebar-4.jpg"
+import TablePagination from '@material-ui/core/TablePagination';
+
+import styles from "assets/jss/nextjs-material-dashboard/views/dashboardStyle.js";
+
+function Products({ products }) {
+  console.log(products)
+  const router = useRouter()
+  const useStyles = makeStyles(styles);
+  const classes = useStyles();
+
+  const [page, setPage] = React.useState(0);
+  const [rowsPerPage, setRowsPerPage] = React.useState(8);
+
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(+event.target.value);
+    setPage(0);
+  };
+
+  return (
+    <div>
+      <GridContainer>
+        {(rowsPerPage > 0
+          ? products.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+          : products
+        ).map(product =>
+          <GridItem
+            key={`${product._id}${product.brend}`}
+            xs={12} sm={6} md={2}
+            onClick={() => router.push(`/admin/products/product/${product._id}`)}>
+            <Card style={{cursor:"pointer"}}>
+              <CardHeader stats icon>
+                <div style={{
+                  position: 'relative',
+                  width: '100%',
+                  maxHeight: '350px',
+                  overflow: 'hidden',
+                }}>
+                  <img height="auto" width="100%" src={require(`../../../assets/img/${product.logo}`)} />
+                </div>
+                <h3 className={classes.cardTitle}>
+                  {product.product}
+                </h3>
+                <h4 className={classes.cardTitle}>
+                  {product.price} BYR
+                  </h4>
+              </CardHeader>
+              <br />
+            </Card>
+          </GridItem>
+        )}
+      </GridContainer>
+      <div style={{ display: "flex", justifyContent: "center" }}>
+        <TablePagination
+          rowsPerPageOptions={[8, 16, 24]}
+          component="div"
+          count={products.length}
+          rowsPerPage={rowsPerPage}
+          page={page}
+          onChangePage={handleChangePage}
+          onChangeRowsPerPage={handleChangeRowsPerPage}
+          className={classes.brendPagination}
+        />
+      </div>
+    </div>
+  );
+}
+Products.layout = Admin;
+export default Products;
+
+export async function getServerSideProps({ params }) {
+  const dev = process.env.NODE_ENV !== "production"
+  const api = dev ? "http://localhost:3000" : 'https://desolate-wildwood-83661.herokuapp.com'
+  const response = await fetch(`${api}/api/${params.brend}`)
+  const products = await response.json()
+
+  return {
+    props: { products }
+  }
+}

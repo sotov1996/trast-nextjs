@@ -1,0 +1,42 @@
+{
+    "title":"Hello",
+    "header": "Detergenty i preparaty czyszczące",
+    "navbar": "Wrócić do",
+    "menu": {
+        "main":"Główny",
+        "feedback":"Informacje zwrotne",
+        "contact":"Łączność",
+        "admin":"Administrator"
+    },
+    "contact": {
+        "contact":"Łączność",
+        "find":"ZNAJDŹ NAS",
+        "adress":"Adres",
+        "adress1":"Republika Białorusi, 224023, obwód brzeski, Brześć, ul. Moskwa, 332 / 3B-4v",
+        "hours":"Godziny otwarcia",
+        "hours1":"Poniedziałek - Piątek: 9:00 - 16:00",
+        "sklad":"Magazyn"
+    },
+    "feedback": {
+        "name": "Opis kolejności (tylko zamówienia zbiorcze)",
+        "title": "Tytuł",
+        "description": "Opis",
+        "send": "Wyślij wiadomość",
+        "event": "Wiadomość wysłana"
+    },
+    "admin": {
+        "name":"Zaloguj się na swoje konto",
+        "login":"Zaloguj sie",
+        "password":"Hasło",
+        "signin": "Wejść"
+    },
+    "snackbar": {
+        "error": "Zły login lub hasło!",
+        "succes": "Sukces!"
+    },
+    "btn": {
+        "back": "Wrócić do"
+    },
+    "information1": "Bezpośredni dealer poszukujący partnerów w zakupach i dostawach towarów od polskich producentów w Rosji.",
+    "information2": "Pośrednictwo handlowe w zakresie hurtowych zakupów chemii gospodarczej z Polski"
+}
