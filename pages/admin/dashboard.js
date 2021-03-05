@@ -71,7 +71,7 @@ export default Dashboard;
 export async function getServerSideProps(context) {
   try{
     const dev = process.env.NODE_ENV !== "production"
-    const api = dev ? "http://localhost:3000" : 'https://desolate-wildwood-83661.herokuapp.com'
+    const api = dev ? "http://localhost:3000" : 'https://trast-nextjs.herokuapp.com'
     const response = await fetch(`${api}/api/adminBrend`)
     const brends = await response.json()
   
