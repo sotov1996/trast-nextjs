@@ -1,8 +1,8 @@
 const nodemailer = require('nodemailer')
-const dotenv = require("dotenv")
+require("dotenv").config()
 
 const email = process.env.FROM_EMAIL
-const password = "HgUl_dsEr$5"
+const password = process.env.FROM_EMAIL_PASS
 
 const sendEmail = async (message) => {
     const transporter = nodemailer.createTransport(

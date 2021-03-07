@@ -4,13 +4,14 @@ const mongoose = require("mongoose")
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const cors = require("cors")
+require("dotenv").config()
 
 const port = parseInt(process.env.PORT, 10) || 3000
 const dev = process.env.NODE_ENV !== 'production'
 const app = next({ dev })
 const handle = app.getRequestHandler()
 
-mongoose.connect("mongodb+srv://trast_app:8scIdjQCb5nhoexd@cluster0.zuy1s.mongodb.net/trast", {
+mongoose.connect(process.env.DB_HOST, {
   useFindAndModify: false,
   useNewUrlParser: true,
   useUnifiedTopology: true,
