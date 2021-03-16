@@ -59,7 +59,7 @@ router.post("/feedback", async (req, res) => {
 })
 
 const storage = multer.diskStorage({
-    destination: 'public/images',
+    destination: 'assets/img',
     filename: (req, file, cb) => {
         return cb(null, `${file.originalname}`)
     }
