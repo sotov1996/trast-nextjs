@@ -59,7 +59,7 @@ router.post("/feedback", async (req, res) => {
 })
 
 const storage = multer.diskStorage({
-    destination: require.main?.path + '/public/images',
+    destination: 'public/images',
     filename: (req, file, cb) => {
         return cb(null, `${file.originalname}`)
     }
@@ -117,6 +117,7 @@ router.put("/update", upload.single('logo'), async (req, res) => {
 });
 
 router.post("/add-brend", upload.single('logo'), async (req, res) => {
+    console.log(req.file)
     try {
         const brend = new Brend({
             brend: req.body.brend,
