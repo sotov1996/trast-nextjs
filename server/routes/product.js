@@ -68,7 +68,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 router.post("/add", upload.single('logo'), async (req, res) => {
-    console.log(req.req.file)
+    console.log(req.file)
     try {
         const product = new Product({
             brend: req.body.brend,
