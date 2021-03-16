@@ -50,12 +50,12 @@ function Products({ products }) {
                 }}>
                   <img height="auto" width="100%" src={`${window.location.origin}/assets/img/${product.logo}`} />
                 </div>
-                <h3 className={classes.cardTitle}>
+                <h4 className={classes.cardTitle} style={{textAlign:"center"}}>
                   {product.product}
-                </h3>
-                <h4 className={classes.cardTitle}>
+                </h4>
+                <h4 className={classes.cardTitle} style={{textAlign:"center"}}>
                   {product.price} BYR
-                  </h4>
+                </h4>
               </CardHeader>
               <br />
             </Card>
