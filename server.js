@@ -10,6 +10,7 @@ const port = parseInt(process.env.PORT, 10) || 3000
 const dev = process.env.NODE_ENV !== 'production'
 const app = next({ dev })
 const handle = app.getRequestHandler()
+const path = require('path')
 
 mongoose.connect(process.env.DB_HOST, {
   useFindAndModify: false,
@@ -20,6 +21,9 @@ mongoose.connect(process.env.DB_HOST, {
 
 app.prepare().then(() => {
   const server = express()
+
+  server.use(express.static('public'))
+  server.use('/public', express.static(path.join(__dirname, 'public')))
 
   server.use(bodyParser.json());
   server.use(cookieParser());
