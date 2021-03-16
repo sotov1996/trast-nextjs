@@ -22,8 +22,8 @@ mongoose.connect(process.env.DB_HOST, {
 app.prepare().then(() => {
   const server = express()
 
-  server.use(express.static('public'))
-  server.use('/public', express.static(path.join(__dirname, 'public')))
+  server.use(express.static('assets'))
+  server.use('/assets', express.static(path.join(__dirname, 'assets')))
 
   server.use(bodyParser.json());
   server.use(cookieParser());
