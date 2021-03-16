@@ -63,7 +63,7 @@ function Product({ product }) {
                     <GridItem xs={12} sm={12} md={4}>
                         <br />
                         <div className={classes.cardImage}>
-                            <img style={{ width: "100%", height: "auto" }} src={require(`${window.location.origin}/assets/img/${product[0].logo}`)} />
+                            <img style={{ width: "100%", height: "auto" }} src={`${window.location.origin}/assets/img/${product[0].logo}`} />
                         </div>
 
                     </GridItem>

@@ -48,7 +48,7 @@ function Products({ products }) {
                   maxHeight: '350px',
                   overflow: 'hidden',
                 }}>
-                  <img height="auto" width="100%" src={require(`${window.location.origin}/assets/img/${product.logo}`)} />
+                  <img height="auto" width="100%" src={`${window.location.origin}/assets/img/${product.logo}`} />
                 </div>
                 <h3 className={classes.cardTitle}>
                   {product.product}

@@ -38,9 +38,9 @@ const Dashboard = ({brends}) => {
                     width: '100%',
                     overflow: 'hidden',
                   }}>
-                    {require(`${window.location.origin}/assets/img/${brend.logo}`)
+                    {`${window.location.origin}/assets/img/${brend.logo}`
                       ? <img height="auto" width="100%"
-                        src={require(`${window.location.origin}/assets/img/${brend.logo}`)} />
+                        src={`${window.location.origin}/assets/img/${brend.logo}`} />
                       : <p>Not image</p>}
                   </div>
 
