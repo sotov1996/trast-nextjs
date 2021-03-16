@@ -14,7 +14,6 @@ import CardHeader from "components/Card/CardHeader.js";
 import CardBody from "components/Card/CardBody.js";
 
 import styles from "assets/jss/nextjs-material-dashboard/views/dashboardStyle.js";
-import Image from 'next/image'
 
 const Dashboard = ({ brends }) => {
   //const { t } = useTranslation();
@@ -38,7 +37,7 @@ const Dashboard = ({ brends }) => {
                     width: '100%',
                     overflow: 'hidden',
                   }}>
-                    <img src={`${process.env.NODE_ENV}/public/images/${brend.logo}`}/>
+                    <img height="auto" width="100%" src={`${window.location.origin}/assets/img/${brend.logo}`} />
 
                   </div>
 
