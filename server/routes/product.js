@@ -6,6 +6,7 @@ const Brend = require("../models/brend")
 const sendEmail = require("../services/servicesEmail")
 const multer = require('multer');
 require("dotenv").config()
+const path = require('path');
 
 router.get("/", async (req, res) => {
     try {
@@ -58,7 +59,7 @@ router.post("/feedback", async (req, res) => {
 })
 
 const storage = multer.diskStorage({
-    destination: 'assets/img',
+    destination: require.main?.path + '/public/images',
     filename: (req, file, cb) => {
         return cb(null, `${file.originalname}`)
     }
@@ -67,6 +68,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 router.post("/add", upload.single('logo'), async (req, res) => {
+    console.log(req.req.file)
     try {
         const product = new Product({
             brend: req.body.brend,
