@@ -40,7 +40,7 @@ const Dashboard = ({brends}) => {
                   }}>
                     {require(`../../assets/img/${brend.logo}`)
                       ? <img height="auto" width="100%"
-                        src={require(`../../assets/img/${brend.logo}`)} />
+                        src={require(`${window.location.origin}/assets/img/${brend.logo}`)} />
                       : <p>Not image</p>}
                   </div>
 
