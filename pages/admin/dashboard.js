@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router"
 import { useTranslation } from 'react-i18next';
 // react plugin for creating charts
@@ -14,8 +14,9 @@ import CardHeader from "components/Card/CardHeader.js";
 import CardBody from "components/Card/CardBody.js";
 
 import styles from "assets/jss/nextjs-material-dashboard/views/dashboardStyle.js";
+import Image from 'next/image'
 
-const Dashboard = ({brends}) => {
+const Dashboard = ({ brends }) => {
   //const { t } = useTranslation();
 
   const router = useRouter()
@@ -38,10 +39,8 @@ const Dashboard = ({brends}) => {
                     width: '100%',
                     overflow: 'hidden',
                   }}>
-                    {`${window.location.origin}/assets/img/${brend.logo}`
-                      ? <img height="auto" width="100%"
-                        src={`${window.location.origin}/assets/img/${brend.logo}`} />
-                      : <p>Not image</p>}
+                    <Image src={`/images/${brend.logo}`} alt="me" height="auto" width="100%" />
+
                   </div>
 
                   <div style={{ display: "flex", justifyContent: "space-between" }}>
@@ -69,16 +68,16 @@ Dashboard.layout = Admin;
 export default Dashboard;
 
 export async function getServerSideProps(context) {
-  try{
+  try {
     const dev = process.env.NODE_ENV !== "production"
     const api = dev ? "http://localhost:3000" : 'https://trast-nextjs.herokuapp.com'
     const response = await fetch(`${api}/api/adminBrend`)
     const brends = await response.json()
-  
+
     return {
       props: { brends }
     }
-  }catch(e) {
+  } catch (e) {
     console.log(e)
   }
 }
