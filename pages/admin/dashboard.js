@@ -18,7 +18,6 @@ import Image from 'next/image'
 
 const Dashboard = ({ brends }) => {
   //const { t } = useTranslation();
-
   const router = useRouter()
   const useStyles = makeStyles(styles);
   const classes = useStyles();
@@ -39,7 +38,7 @@ const Dashboard = ({ brends }) => {
                     width: '100%',
                     overflow: 'hidden',
                   }}>
-                    <Image src={`/images/${brend.logo}`} alt="me" height="auto" width="100%" />
+                    <img src={`${process.env.NODE_ENV}/public/images/${brend.logo}`}/>
 
                   </div>
 
