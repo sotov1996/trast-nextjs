@@ -48,7 +48,7 @@ function Products({ products }) {
                   maxHeight: '350px',
                   overflow: 'hidden',
                 }}>
-                  <img height="auto" width="100%" src={`${window.location.origin}/assets/img/${product.logo}`} />
+                  <img height="auto" width="100%" src={`data:${product.images.contentType};base64,${product.images.img}`} />
                 </div>
                 <h4 className={classes.cardTitle} style={{textAlign:"center"}}>
                   {product.product}

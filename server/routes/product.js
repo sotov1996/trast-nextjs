@@ -6,7 +6,8 @@ const Brend = require("../models/brend")
 const sendEmail = require("../services/servicesEmail")
 const multer = require('multer');
 require("dotenv").config()
-const path = require('path');
+var fs = require('fs');
+var path = require('path');
 
 router.get("/", async (req, res) => {
     try {
@@ -68,14 +69,18 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 router.post("/add", upload.single('logo'), async (req, res) => {
-    console.log(req.file)
+    const thumb = new Buffer(fs.readFileSync(path.join(__dirname + '../../../assets/img/' + req.file.filename))).toString('base64')
     try {
         const product = new Product({
             brend: req.body.brend,
             price: req.body.price,
             description: req.body.description,
             product: req.body.product,
-            logo: req.file.filename
+            logo: req.file.filename,
+            images: {
+                img: thumb, 
+                contentType: req.file.mimetype
+            }
         })
 
         await product.save()
@@ -88,6 +93,7 @@ router.post("/add", upload.single('logo'), async (req, res) => {
 
 router.put("/update", upload.single('logo'), async (req, res) => {
     try {
+        const thumb = new Buffer(fs.readFileSync(path.join(__dirname + '../../../assets/img/' + req.file.filename))).toString('base64')
         let reqProduct = {}
         if (!req.file) {
             reqProduct = {
@@ -102,7 +108,11 @@ router.put("/update", upload.single('logo'), async (req, res) => {
                 price: req.body.price,
                 description: req.body.description,
                 product: req.body.product,
-                logo: req.file.filename
+                logo: req.file.filename,
+                images: {
+                    img: thumb, 
+                    contentType: req.file.mimetype
+                }
             }
         }
 
@@ -117,12 +127,20 @@ router.put("/update", upload.single('logo'), async (req, res) => {
 });
 
 router.post("/add-brend", upload.single('logo'), async (req, res) => {
-    console.log(req.file)
     try {
+        const thumb = new Buffer(fs.readFileSync(path.join(__dirname + '../../../assets/img/' + req.file.filename))).toString('base64')
         const brend = new Brend({
             brend: req.body.brend,
             description: req.body.description,
-            logo: req.file.filename
+            logo: req.file.filename,
+            /*img: {
+                data: fs.readFileSync(path.join(__dirname + '../../../assets/img/' + req.file.filename)),
+                contentType: req.file.mimetype
+            },*/
+            images: {
+                img: thumb, 
+                contentType: req.file.mimetype
+            }
         })
 
         await brend.save()
@@ -136,6 +154,7 @@ router.post("/add-brend", upload.single('logo'), async (req, res) => {
 
 router.put("/update-brend", upload.single('logo'), async (req, res) => {
     try {
+        const thumb = new Buffer(fs.readFileSync(path.join(__dirname + '../../../assets/img/' + req.file.filename))).toString('base64')
         let reqProduct = {}
         if (!req.file) {
             reqProduct = {
@@ -146,7 +165,11 @@ router.put("/update-brend", upload.single('logo'), async (req, res) => {
             reqProduct = {
                 brend: req.body.brend,
                 description: req.body.description,
-                logo: req.file.filename
+                logo: req.file.filename,
+                images: {
+                    img: thumb, 
+                    contentType: req.file.mimetype
+                }
             }
         }
 
@@ -187,7 +210,6 @@ router.get("/adminBrend", async (req, res) => {
         let obj = {}
         brend.forEach(el => obj[el.brend] = [])
         product.forEach((el) => ++obj[el.brend])
-
         res.send([brend, obj])
     } catch (e) {
         res.send("error")
