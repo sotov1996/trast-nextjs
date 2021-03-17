@@ -1,24 +1,24 @@
 import React from "react";
 import { useRouter } from "next/router"
 import { makeStyles } from "@material-ui/core/styles";
+import { useTranslation } from 'react-i18next';
 import Admin from "layouts/Admin.js";
 import GridItem from "components/Grid/GridItem.js";
 import GridContainer from "components/Grid/GridContainer.js";
 import Card from "components/Card/Card.js";
 import CardHeader from "components/Card/CardHeader.js";
-import image from "../../../assets/img/sidebar-4.jpg"
 import TablePagination from '@material-ui/core/TablePagination';
 
 import styles from "assets/jss/nextjs-material-dashboard/views/dashboardStyle.js";
 
 function Products({ products }) {
-  console.log(products)
+  const { t } = useTranslation();
   const router = useRouter()
   const useStyles = makeStyles(styles);
   const classes = useStyles();
 
   const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(8);
+  const [rowsPerPage, setRowsPerPage] = React.useState(16);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -51,7 +51,7 @@ function Products({ products }) {
                   <img height="auto" width="100%" src={`data:${product.images.contentType};base64,${product.images.img}`} />
                 </div>
                 <h4 className={classes.cardTitle} style={{textAlign:"center"}}>
-                  {product.product}
+                  {t(`${product._id}.product`)}
                 </h4>
                 <h4 className={classes.cardTitle} style={{textAlign:"center"}}>
                   {product.price} BYR
@@ -64,7 +64,7 @@ function Products({ products }) {
       </GridContainer>
       <div style={{ display: "flex", justifyContent: "center" }}>
         <TablePagination
-          rowsPerPageOptions={[8, 16, 24]}
+          rowsPerPageOptions={[ 8, 16, 24]}
           component="div"
           count={products.length}
           rowsPerPage={rowsPerPage}
