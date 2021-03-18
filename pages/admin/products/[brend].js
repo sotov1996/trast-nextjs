@@ -18,7 +18,7 @@ function Products({ products }) {
   const classes = useStyles();
 
   const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(16);
+  const [rowsPerPage, setRowsPerPage] = React.useState(12);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -64,7 +64,7 @@ function Products({ products }) {
       </GridContainer>
       <div style={{ display: "flex", justifyContent: "center" }}>
         <TablePagination
-          rowsPerPageOptions={[ 8, 16, 24]}
+          rowsPerPageOptions={[ 12, 18, 24]}
           component="div"
           count={products.length}
           rowsPerPage={rowsPerPage}
