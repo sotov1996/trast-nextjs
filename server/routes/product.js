@@ -93,7 +93,6 @@ router.post("/add", upload.single('logo'), async (req, res) => {
 
 router.put("/update", upload.single('logo'), async (req, res) => {
     try {
-        const thumb = new Buffer(fs.readFileSync(path.join(__dirname + '../../../assets/img/' + req.file.filename))).toString('base64')
         let reqProduct = {}
         if (!req.file) {
             reqProduct = {
@@ -103,6 +102,7 @@ router.put("/update", upload.single('logo'), async (req, res) => {
                 product: req.body.product
             }
         } else {
+            const thumb = new Buffer(fs.readFileSync(path.join(__dirname + '../../../assets/img/' + req.file.filename))).toString('base64')
             reqProduct = {
                 brend: req.body.brend,
                 price: req.body.price,
@@ -154,7 +154,6 @@ router.post("/add-brend", upload.single('logo'), async (req, res) => {
 
 router.put("/update-brend", upload.single('logo'), async (req, res) => {
     try {
-        const thumb = new Buffer(fs.readFileSync(path.join(__dirname + '../../../assets/img/' + req.file.filename))).toString('base64')
         let reqProduct = {}
         if (!req.file) {
             reqProduct = {
@@ -162,6 +161,7 @@ router.put("/update-brend", upload.single('logo'), async (req, res) => {
                 description: req.body.description
             }
         } else {
+            const thumb = new Buffer(fs.readFileSync(path.join(__dirname + '../../../assets/img/' + req.file.filename))).toString('base64')
             reqProduct = {
                 brend: req.body.brend,
                 description: req.body.description,
