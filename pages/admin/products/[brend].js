@@ -51,7 +51,7 @@ function Products({ products }) {
                   <img height="auto" width="100%" src={`data:${product.images.contentType};base64,${product.images.img}`} />
                 </div>
                 <h4 className={classes.cardTitle} style={{textAlign:"center", height: "54px"}}>
-                  {product.product == t(`${product._id}.product`) ? t(`${product._id}.product`) : product.product}
+                  {t(`${product._id}.product`)}
                 </h4>
                 <h4 className={classes.cardTitle} style={{textAlign:"center"}}>
                   {product.price} BYR
