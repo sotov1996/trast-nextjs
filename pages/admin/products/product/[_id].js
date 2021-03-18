@@ -56,7 +56,9 @@ function Product({ product }) {
     return (
         <Card>
             <CardBody>
-                <h4 className={classes.cardTitleWhite}>{t(`${product[0]._id}.product`)}</h4>
+                <h4 className={classes.cardTitleWhite}>
+                    {product[0].product == t(`${product[0]._id}.product`) ? t(`${product[0]._id}.product`) : product[0].product}
+                </h4>
                 <p className={classes.cardCategoryWhite}>
                     {product[0].brend}
                 </p>
@@ -69,7 +71,9 @@ function Product({ product }) {
 
                     </GridItem>
                     <GridItem xs={12} sm={12} md={8}>
-                        <h5 style={{ textAlign: "center" }}>{t(`${product[0]._id}.description`)}</h5>
+                        <h5 style={{ textAlign: "center" }}>
+                            {product[0].description == t(`${product[0]._id}.description`) ? t(`${product[0]._id}.description`) : product[0].description}
+                        </h5>
                         <br />
                     </GridItem>
                 </GridContainer>
