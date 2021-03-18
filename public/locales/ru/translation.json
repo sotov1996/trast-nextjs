@@ -84,6 +84,11 @@
         "description": "Гель для туалета APISek морской, лесной 750 мл.",
         "product": "Гель для туалета APISek"
     },
+    "60511e46e8b0020015600d58": {
+        "brend": "Garchem",
+        "description": "Средство для мытья посуды KUBUS лимон, мята 5 л pet/hdpe, канистра",
+        "product": "Средство для мытья посуды"
+    },
     "60511f1ce8b0020015600d5f": {
         "brend": "Garchem",
         "description": "Средство для мытья окон KUBUS 1 л.",
@@ -138,11 +143,6 @@
         "brend": "Achem",
         "description": "Гель для стирки Wirek Universal 4 л",
         "product": "Гель для стирки Wirek Universal"
-    },
-    "60511e46e8b0020015600d58": {
-        "brend": "Garchem",
-        "description": "Средство для мытья посуды KUBUS лимон, мята 5 л pet/hdpe, канистра",
-        "product": "Средство для мытья посуды"
     },
     "60530186e31c6b001557fb72": {
         "brend": "Achem",
