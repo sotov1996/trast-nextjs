@@ -8,10 +8,13 @@ import GridContainer from "components/Grid/GridContainer.js";
 import Card from "components/Card/Card.js";
 import CardHeader from "components/Card/CardHeader.js";
 import TablePagination from '@material-ui/core/TablePagination';
+import CircularProgress from '@material-ui/core/CircularProgress';
+
 
 import styles from "assets/jss/nextjs-material-dashboard/views/dashboardStyle.js";
 
 function Products({ products }) {
+  console.log(products)
   const { t } = useTranslation();
   const router = useRouter()
   const useStyles = makeStyles(styles);
@@ -28,7 +31,9 @@ function Products({ products }) {
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
-
+  if(!products){
+    return <><CircularProgress /></>
+  }
   return (
     <div>
       <GridContainer>
@@ -50,7 +55,7 @@ function Products({ products }) {
                 }}>
                   <img height="auto" width="100%" src={`data:${product.images.contentType};base64,${product.images.img}`} />
                 </div>
-                <h4 className={classes.cardTitle} style={{textAlign:"center", height: "54px"}}>
+                <h4 className={classes.cardTitle} style={{textAlign:"center"}}>
                   {t(`${product._id}.product`)}
                 </h4>
                 <h4 className={classes.cardTitle} style={{textAlign:"center"}}>

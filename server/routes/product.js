@@ -174,6 +174,26 @@ router.put("/update-brend", upload.single('logo'), async (req, res) => {
         }
 
         const updateBrend = await Brend.updateOne({ _id: req.body.id }, reqProduct, { upsert: true })
+        //add translate
+        /*fs.readFile(path.join(__dirname + '../../../public/locales/ru/translation.json'), function (err, data) {
+            var json = JSON.parse(data);
+            for(let jsonBrend in json){
+                if(jsonBrend == req.body.id ){
+                    jsonBrend.product= req.body.brend,
+                    jsonBrend.description = req.body.description
+                }else {
+                    json[req.body.id] = {
+                        product: req.body.brend,
+                        description: req.body.description
+                    }
+                }
+            }
+            //json.push('search result: ' + currentSearchResult);    
+            fs.writeFile(path.join(__dirname + '../../../public/locales/ru/translation.json'), JSON.stringify(json), function(err){
+              if (err) throw err;
+              console.log('The "data to append" was appended to file!');
+            });
+        })*/
         res.send(reqProduct)
         reqProduct = {}
     } catch (e) {
