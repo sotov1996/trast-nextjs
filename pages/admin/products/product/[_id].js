@@ -57,7 +57,8 @@ function Product({ product }) {
         <Card>
             <CardBody>
                 <h4 className={classes.cardTitleWhite}>
-                    {t(`${product[0]._id}.product`)}
+                {useTranslation()[1].language == "pl" ? t(`${product[0]._id}.product`) : product[0].product}
+                    {/*t(`${product[0]._id}.product`)*/}
                 </h4>
                 <p className={classes.cardCategoryWhite}>
                     {product[0].brend}
@@ -72,7 +73,8 @@ function Product({ product }) {
                     </GridItem>
                     <GridItem xs={12} sm={12} md={8}>
                         <h5 style={{ textAlign: "center" }}>
-                            {t(`${product[0]._id}.description`)}
+                        {useTranslation()[1].language == "pl" ? t(`${product[0]._id}.description`) : product[0].description}
+                            {/*t(`${product[0]._id}.description`)*/}
                         </h5>
                         <br />
                     </GridItem>

@@ -55,7 +55,7 @@ function Products({ products }) {
                   <img height="auto" width="100%" src={`data:${product.images.contentType};base64,${product.images.img}`} />
                 </div>
                 <h4 className={classes.cardTitle} style={{textAlign:"center", minHeight: "81px", wordBreak: "break-all"}}>
-                  {t(`${product._id}.product`)}
+                  {useTranslation()[1].language == "pl" ? t(`${product._id}.product`) : product.product}
                 </h4>
                 <h4 className={classes.cardTitle} style={{textAlign:"center"}}>
                   {product.price} BYR
