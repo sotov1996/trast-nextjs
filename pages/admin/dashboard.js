@@ -17,7 +17,6 @@ import CardBody from "components/Card/CardBody.js";
 import styles from "assets/jss/nextjs-material-dashboard/views/dashboardStyle.js";
 
 const Dashboard = ({ brends }) => {
-  console.log(brends)
   //const { t } = useTranslation();
   const router = useRouter()
   const useStyles = makeStyles(styles);

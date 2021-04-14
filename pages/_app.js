@@ -9,7 +9,6 @@ import "../i18n"
 import "../assets/css/nextjs-material-dashboard.css?v=1.1.0";
 
 Router.onRouteChangeStart = url => {
-  console.log(url)
   NProgress.start()
 }
 

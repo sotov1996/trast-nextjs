@@ -14,7 +14,6 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import styles from "assets/jss/nextjs-material-dashboard/views/dashboardStyle.js";
 
 function Products({ products }) {
-  console.log(products)
   const { t } = useTranslation();
   const router = useRouter()
   const useStyles = makeStyles(styles);
@@ -45,7 +44,7 @@ function Products({ products }) {
             key={`${product._id}${product.brend}`}
             xs={12} sm={6} md={2}
             onClick={() => router.push(`/admin/products/product/${product._id}`)}>
-            <Card style={{cursor:"pointer"}}>
+            <Card style={{cursor:"pointer", minHeight: "310px"}}>
               <CardHeader stats icon>
                 <div style={{
                   position: 'relative',

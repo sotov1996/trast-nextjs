@@ -498,7 +498,6 @@ export function AdminBrend({ classes }) {
   }
 
   const handleChange = (e) => {
-    console.log(e.target)
     setNewUser({ ...newUser, [e.target.name]: e.target.value });
   }
 
