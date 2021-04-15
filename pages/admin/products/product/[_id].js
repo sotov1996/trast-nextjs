@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useRouter } from "next/router"
 import { makeStyles } from "@material-ui/core/styles";
 import Admin from "layouts/Admin.js";
@@ -8,6 +8,7 @@ import Card from "components/Card/Card.js";
 import { useTranslation } from 'react-i18next';
 import CardHeader from "components/Card/CardHeader.js";
 import image from "../../../../assets/img/sidebar-4.jpg"
+import i18n from 'i18next';
 
 import CardBody from "components/Card/CardBody.js";
 
@@ -53,6 +54,12 @@ function Product({ product }) {
     const useStyles = makeStyles(styles);
     const classes = useStyles();
 
+    const [language, setLanguage] = React.useState('');
+
+    useEffect(() => {
+      setLanguage(i18n.language)
+    })
+
     return (
         <Card>
             <CardBody>
@@ -73,7 +80,7 @@ function Product({ product }) {
                     </GridItem>
                     <GridItem xs={12} sm={12} md={8}>
                         <h5 style={{ textAlign: "center" }}>
-                        {useTranslation()[1].language == "pl" ? t(`${product[0]._id}.description`) : product[0].description}
+                        {language == "pl" ? t(`${product[0]._id}.description`) : product[0].description}
                             {/*t(`${product[0]._id}.description`)*/}
                         </h5>
                         <br />

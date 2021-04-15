@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useRouter } from "next/router"
 import { makeStyles } from "@material-ui/core/styles";
 import { useTranslation } from 'react-i18next';
@@ -9,6 +9,7 @@ import Card from "components/Card/Card.js";
 import CardHeader from "components/Card/CardHeader.js";
 import TablePagination from '@material-ui/core/TablePagination';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import i18n from 'i18next';
 
 
 import styles from "assets/jss/nextjs-material-dashboard/views/dashboardStyle.js";
@@ -21,6 +22,11 @@ function Products({ products }) {
 
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(12);
+  const [language, setLanguage] = React.useState('');
+
+  useEffect(() => {
+    setLanguage(i18n.language)
+  })
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -55,8 +61,8 @@ function Products({ products }) {
                   <img height="auto" width="100%" src={`data:${product.images.contentType};base64,${product.images.img}`} />
                 </div>
                 <h4 className={classes.cardTitle} style={{textAlign:"center", minHeight: "81px", wordBreak: "break-all"}}>
-                  {t(`${product._id}.product`)}
-                  {/*useTranslation()[1].language == "pl" ? t(`${product._id}.product`) : product.product*/}
+                  {/*t(`${product._id}.product`)*/}
+                  {language == "pl" ? t(`${product._id}.product`) : product.product}
                 </h4>
                 <h4 className={classes.cardTitle} style={{textAlign:"center"}}>
                   {product.price} BYR
