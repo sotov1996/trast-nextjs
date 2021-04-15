@@ -87,7 +87,7 @@ export default Products;
 
 export async function getServerSideProps({ params }) {
   const dev = process.env.NODE_ENV !== "production"
-  const api = dev ? "http://localhost:3000" : 'https://trast-nextjs.herokuapp.com'
+  const api = dev ? "http://localhost:3000" : 'https://slm-trast.by'
   const response = await fetch(`${api}/api/${params.brend}`)
   const products = await response.json()
 
