@@ -11,7 +11,7 @@ i18n
     fallbackLng: 'ru',
     debug: true,
     detection: {
-      order: ["queryString","cookie"],
+      order: ["queryString","cookie","navigation"],
       cache: ["cookie"]
     },
     react: {
