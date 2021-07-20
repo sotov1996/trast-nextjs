@@ -3,7 +3,7 @@ const Schema = mongoose.Schema
 
 const Currency = new Schema({
     RUB: Number,
-    BLR: Number
+    BYN: Number
 })
 
 module.exports = mongoose.model("Currency", Currency)

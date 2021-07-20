@@ -269,14 +269,14 @@ router.get("/product/:id", async (req, res) => {
 
 router.post("/currency", async (req, res) => {
     try {
-        const { RUB, BLR } = req.body.currency
+        const { RUB, BYN } = req.body.currency
         const currencys = await Currency.find({})
         if(currencys.length){
-            await Currency.findByIdAndUpdate({_id: currencys[0]._id}, { RUB, BLR })
-                .then(() => res.send({ RUB, BLR }))
+            await Currency.findByIdAndUpdate({_id: currencys[0]._id}, { RUB, BYN })
+                .then(() => res.send({ RUB, BYN }))
                 .catch(err => res.status(400).json('Error: ' + err));
         }else {
-            const currency = new Currency({ RUB, BLR })
+            const currency = new Currency({ RUB, BYN })
             await currency.save()
             .then(() => res.send(currency))
             .catch(err => res.status(400).json('Error: ' + err));

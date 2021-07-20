@@ -46,7 +46,7 @@ function Products({ products, currently }) {
       <select onChange={(e) => setPrice(e.target.value)} defaultValue="PLN">
             {currently.length ? <>
             <option id="RUB">RUB</option>
-            <option id="BLR">BLR</option></>: null}
+            <option id="BYN">BYN</option></>: null}
             <option id="PLN">PLN</option>
           </select>
       <GridContainer>
@@ -74,7 +74,7 @@ function Products({ products, currently }) {
                 </h4>
                 <h4 className={classes.cardTitle} style={{textAlign:"center"}}>
                   { currently.length && price === "RUB" ? (product.price * currently[0].RUB).toFixed(0)
-                    : currently.length && price === "BLR" ? (product.price * currently[0].BLR).toFixed(0)
+                    : currently.length && price === "BYN" ? (product.price * currently[0].BYN).toFixed(0)
                     : product.price
                   } {price}
                 </h4>

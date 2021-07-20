@@ -63,11 +63,11 @@ export default function FormDialog() {
           />
           <TextField
             margin="dense"
-            name="BLR"
-            label="BLR"
+            name="BYN"
+            label="BYN"
             type="number"
             onChange={handleUpdate}
-            value={ currency ? currency.BLR : null }
+            value={ currency ? currency.BYN : null }
             fullWidth
           />
         </DialogContent>

@@ -33,7 +33,7 @@ export default function SimpleCard({ handleClickOpen, currency }) {
           Валюта
         </Typography>
         <Typography variant="h5" component="h2">RUB: {currency.RUB}</Typography>
-        <Typography variant="h5" component="h2">BLR: {currency.BLR}</Typography>
+        <Typography variant="h5" component="h2">BYN: {currency.BYN}</Typography>
       </CardContent>
       <CardActions>
         <Button variant="outlined" color="primary" onClick={handleClickOpen}>
