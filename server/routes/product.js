@@ -3,6 +3,7 @@ const router = express.Router();
 const Product = require("../models/product")
 const User = require("../models/user")
 const Brend = require("../models/brend")
+const Currency = require("../models/currency")
 const sendEmail = require("../services/servicesEmail")
 const multer = require('multer');
 require("dotenv").config()
@@ -44,6 +45,16 @@ router.get("/verefikation", async (req, res) => {
         console.log(e)
     }
 })
+
+router.get("/getCurrency", async (req, res) => {
+    try {
+        const currency = await Currency.find({})
+        return res.send(currency)
+    } catch (e) {
+        res.send("error")
+        console.log(e)
+    }
+});
 
 router.post("/feedback", async (req, res) => {
     try {
@@ -256,5 +267,24 @@ router.get("/product/:id", async (req, res) => {
     }
 })
 
+router.post("/currency", async (req, res) => {
+    try {
+        const { RUB, BLR } = req.body.currency
+        const currencys = await Currency.find({})
+        if(currencys.length){
+            await Currency.findByIdAndUpdate({_id: currencys[0]._id}, { RUB, BLR })
+                .then(() => res.send({ RUB, BLR }))
+                .catch(err => res.status(400).json('Error: ' + err));
+        }else {
+            const currency = new Currency({ RUB, BLR })
+            await currency.save()
+            .then(() => res.send(currency))
+            .catch(err => res.status(400).json('Error: ' + err));
+        }
+    } catch (e) {
+        res.send("error")
+        console.log(e)
+    }
+});
 
 module.exports = router;

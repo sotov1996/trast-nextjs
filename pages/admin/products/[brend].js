@@ -14,7 +14,7 @@ import i18n from 'i18next';
 
 import styles from "assets/jss/nextjs-material-dashboard/views/dashboardStyle.js";
 
-function Products({ products }) {
+function Products({ products, currently }) {
   const { t } = useTranslation();
   const router = useRouter()
   const useStyles = makeStyles(styles);
@@ -23,10 +23,11 @@ function Products({ products }) {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(12);
   const [language, setLanguage] = React.useState('');
+  const [price, setPrice] = React.useState('PLN');
 
   useEffect(() => {
     setLanguage(i18n.language)
-  })
+  }, [])
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -41,6 +42,13 @@ function Products({ products }) {
   }
   return (
     <div>
+      <span style={{paddingRight: "10px"}}>Валюта:</span>
+      <select onChange={(e) => setPrice(e.target.value)} defaultValue="PLN">
+            {currently.length ? <>
+            <option id="RUB">RUB</option>
+            <option id="BLR">BLR</option></>: null}
+            <option id="PLN">PLN</option>
+          </select>
       <GridContainer>
         {(rowsPerPage > 0
           ? products.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
@@ -65,7 +73,10 @@ function Products({ products }) {
                   {language == "pl" ? t(`${product._id}.product`) : product.product}
                 </h4>
                 <h4 className={classes.cardTitle} style={{textAlign:"center"}}>
-                  {product.price} BYR
+                  { currently.length && price === "RUB" ? (product.price * currently[0].RUB).toFixed(0)
+                    : currently.length && price === "BLR" ? (product.price * currently[0].BLR).toFixed(0)
+                    : product.price
+                  } {price}
                 </h4>
               </CardHeader>
               <br />
@@ -97,7 +108,10 @@ export async function getServerSideProps({ params }) {
   const response = await fetch(`${api}/api/${params.brend}`)
   const products = await response.json()
 
+  const responseCurrently = await fetch(`${api}/api/getCurrency`)
+  const currently = await responseCurrently.json()
+
   return {
-    props: { products }
+    props: { products, currently }
   }
 }

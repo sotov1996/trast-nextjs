@@ -25,6 +25,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
+import FormDialog from "../../../components/CurrencyForm/currencyForm.js"
 
 const styles = {
   cardCategoryWhite: {
@@ -84,7 +85,7 @@ const AdminTab = () => {
   const columns = [
     { id: 'brend', label: 'Бренд', minWidth: 70 },
     { id: 'product', label: 'Товар', minWidth: 150 },
-    { id: 'price', label: 'Цена, руб.', minWidth: 50 },
+    { id: 'price', label: 'Цена, злотый.', minWidth: 50 },
     { id: 'description', label: 'Описание', minWidth: 350 },
     { id: 'logo', label: 'Картинка', minWidth: 170 },
     { id: 'edit', label: '', minWidth: 50 },
@@ -351,6 +352,7 @@ const AdminTab = () => {
     )
   }
   return (
+    <>
     <GridContainer>
       <GridItem xs={12} sm={12} md={12}>
         <Card>
@@ -414,6 +416,8 @@ const AdminTab = () => {
         </Card>
       </GridItem>
     </GridContainer>
+    <FormDialog />
+    </>
   );
 }
 
