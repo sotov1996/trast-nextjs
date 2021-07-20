@@ -37,6 +37,9 @@ const Dashboard = ({ brends }) => {
                     position: 'relative',
                     width: '100%',
                     overflow: 'hidden',
+                    minHeight: "259px",
+                    display: flex,
+                    alignItems: center
                   }}>
                     {/*<img height="auto" width="100%" src={`${window.location.origin}/assets/img/${brend.logo}`} />*/}
                     {/*<img height="auto" width="100%" src={require(`../../assets/img/${brend.logo}`)} />*/}
