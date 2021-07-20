@@ -118,6 +118,7 @@ const TableList = () => {
         if (res.data == "error") {
           setOpen(true);
         } else {
+          sessionStorage.setItem("token", Math.random().toString(36).slice(2))
           router.push(`/admin/adminTab/adminTab`)
         }
       })

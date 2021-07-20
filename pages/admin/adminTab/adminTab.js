@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useRouter } from "next/router"
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 // layout for this page
@@ -64,6 +65,7 @@ export function Alert(props) {
 const AdminTab = () => {
   const useStyles = makeStyles(styles);
   const classes = useStyles();
+  const router = useRouter()
 
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
@@ -95,6 +97,9 @@ const AdminTab = () => {
   const API = "/api"
 
   useEffect(() => {
+    if(!sessionStorage.getItem("token")){
+      return router.push(`/admin/table-list`)
+    }
     fetch(`${API}`)
       .then(result => result.json())
       .then(rowData => {

@@ -9,6 +9,7 @@ const multer = require('multer');
 require("dotenv").config()
 var fs = require('fs');
 var path = require('path');
+var bcrypt = require('bcryptjs');
 
 router.get("/", async (req, res) => {
     try {
@@ -21,13 +22,15 @@ router.get("/", async (req, res) => {
 
 router.get("/login", async (req, res) => {
     try {
-        const user = await User.find(
-            {
-                login: req.query.login,
-                password: req.query.password
-            }
-        )
-        if (!user.length) {
+        //bcrypt.genSalt(10, function(err, salt) {
+        //    bcrypt.hash("uCgiBrWCST", salt, function(err, hash) {
+        //        console.log("hash",hash)
+        //    });
+        //});
+        const user = await User.find({})
+        const passwordValidated = await bcrypt.compare(req.query.password, user[0].password);
+
+        if (!passwordValidated) {
             res.send("error")
         } else {
             res.send("success")
