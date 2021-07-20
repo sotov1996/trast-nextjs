@@ -23,7 +23,7 @@ function Products({ products, currently }) {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(12);
   const [language, setLanguage] = React.useState('');
-  const [price, setPrice] = React.useState('PLN');
+  const [price, setPrice] = React.useState('RUB');
 
   useEffect(() => {
     setLanguage(i18n.language)
@@ -43,11 +43,9 @@ function Products({ products, currently }) {
   return (
     <div>
       <span style={{paddingRight: "10px"}}>Валюта:</span>
-      <select onChange={(e) => setPrice(e.target.value)} defaultValue="PLN">
-            {currently.length ? <>
+      <select onChange={(e) => setPrice(e.target.value)} defaultValue="RUB">
             <option id="RUB">RUB</option>
-            <option id="BYN">BYN</option></>: null}
-            <option id="PLN">PLN</option>
+            <option id="BYN">BYN</option>
           </select>
       <GridContainer>
         {(rowsPerPage > 0
@@ -63,8 +61,11 @@ function Products({ products, currently }) {
                 <div style={{
                   position: 'relative',
                   width: '100%',
-                  maxHeight: '350px',
+                  height: '212px',
                   overflow: 'hidden',
+                  margin: '15px 0',
+                  display: "flex",
+                  alignItems: "center"
                 }}>
                   <img height="auto" width="100%" src={`data:${product.images.contentType};base64,${product.images.img}`} />
                 </div>

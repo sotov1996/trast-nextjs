@@ -85,7 +85,7 @@ const AdminTab = () => {
   const columns = [
     { id: 'brend', label: 'Бренд', minWidth: 70 },
     { id: 'product', label: 'Товар', minWidth: 150 },
-    { id: 'price', label: 'Цена, злотый.', minWidth: 50 },
+    { id: 'price', label: 'Цена, Евро.', minWidth: 50 },
     { id: 'description', label: 'Описание', minWidth: 350 },
     { id: 'logo', label: 'Картинка', minWidth: 170 },
     { id: 'edit', label: '', minWidth: 50 },
