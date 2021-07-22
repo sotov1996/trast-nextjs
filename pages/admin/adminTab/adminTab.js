@@ -27,6 +27,10 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 import FormDialog from "../../../components/CurrencyForm/currencyForm.js"
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
 
 const styles = {
   cardCategoryWhite: {
@@ -56,6 +60,13 @@ const styles = {
       lineHeight: "1",
     },
   },
+  formControl: {
+    width: "100%",
+    marginBottom: "10px"
+  },
+  selectEmpty: {
+    marginTop: "10px",
+  },
 };
 
 export function Alert(props) {
@@ -83,6 +94,7 @@ const AdminTab = () => {
   const [openFormAdd, setOpenFormAdd] = React.useState(false);
   const [openSnackbar, setOpenSnackbar] = React.useState(false);
   const [snackbar, setSnackbar] = React.useState({ severity: "", text: "" });
+  const [allBrend, setAllBrend] = React.useState({});
 
   const columns = [
     { id: 'brend', label: 'Бренд', minWidth: 70 },
@@ -257,6 +269,24 @@ const AdminTab = () => {
               style={{ marginBottom: 20 }}
             />
             {columns.map(column => {
+              if (column.id === 'brend') {
+                return (
+                  <FormControl variant="filled" className={classes.formControl}>
+                    <InputLabel id="demo-simple-select-label">Бренд</InputLabel>
+                    <Select
+                      name={column.id}
+                      labelId="demo-simple-select-label"
+                      id="demo-simple-select"
+                      value={editUser[column.id]}
+                      onChange={handleUpdate}
+                    >
+                      {allBrend.map( (brend, index) => {
+                        return <MenuItem value={brend}>{brend}</MenuItem>
+                      })}
+                    </Select>
+                  </FormControl>
+                )
+              }
               if (column.id == "price") {
                 return (
                   <TextField
@@ -272,6 +302,7 @@ const AdminTab = () => {
                     variant="outlined"
                     value={editUser[column.id]}
                     onChange={handleUpdate}
+                    inputProps={{ step: "any" }}
                   />
                 )
               }
@@ -313,6 +344,24 @@ const AdminTab = () => {
               style={{ marginBottom: 20 }}
             />
             {columns.map(column => {
+              if (column.id === 'brend') {
+                return (
+                  <FormControl variant="filled" className={classes.formControl}>
+                    <InputLabel id="demo-simple-select-label">Бренд</InputLabel>
+                    <Select
+                      name={column.id}
+                      labelId="demo-simple-select-label"
+                      id="demo-simple-select"
+                      value={editUser[column.id]}
+                      onChange={handleChange}
+                    >
+                      {allBrend.map( (brend, index) => {
+                        return <MenuItem value={brend}>{brend}</MenuItem>
+                      })}
+                    </Select>
+                  </FormControl>
+                )
+              }
               if (column.id == "price") {
                 return (
                   <TextField
@@ -328,6 +377,7 @@ const AdminTab = () => {
                     variant="outlined"
                     value={editUser[column.id]}
                     onChange={handleChange}
+                    inputProps={{ step: "any" }}
                   />
                 )
               }
@@ -416,7 +466,7 @@ const AdminTab = () => {
         <Card>
           <CardBody>
             <h4 style={{ fontWeight: 400, fontSize: 20 }}>Таблица Категорий</h4>
-            <AdminBrend classes={classes} />
+            <AdminBrend classes={classes} setAllBrend={setAllBrend} />
           </CardBody>
         </Card>
       </GridItem>
@@ -430,7 +480,7 @@ AdminTab.layout = Admin;
 
 export default AdminTab;
 
-export function AdminBrend({ classes }) {
+export function AdminBrend({ classes, setAllBrend }) {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [rows, setRows] = React.useState([]);
@@ -463,8 +513,9 @@ export function AdminBrend({ classes }) {
       .then(result => result.json())
       .then(rowData => {
         setRows(rowData[0])
+        setAllBrend(Object.keys(rowData[1]))
       })
-  }, []);
+  }, [openSnackbar]);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -589,6 +640,7 @@ export function AdminBrend({ classes }) {
                       onChange={handleUpdate}
                       style={{ marginBottom: 20 }}
                       variant="outlined"
+                      inputProps={{ step: "any" }}
                     />
                   )
                 }
