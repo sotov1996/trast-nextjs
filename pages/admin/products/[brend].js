@@ -27,7 +27,7 @@ function Products({ products, currently }) {
 
   useEffect(() => {
     setLanguage(i18n.language)
-  }, [])
+  }, [language])
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
