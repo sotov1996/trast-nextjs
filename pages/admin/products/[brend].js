@@ -22,12 +22,7 @@ function Products({ products, currently }) {
 
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(12);
-  const [language, setLanguage] = React.useState('');
   const [price, setPrice] = React.useState('RUB');
-
-  useEffect(() => {
-    setLanguage(i18n.language)
-  }, [language])
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -71,7 +66,7 @@ function Products({ products, currently }) {
                 </div>
                 <h4 className={classes.cardTitle} style={{textAlign:"center", minHeight: "81px", wordWrap: "break-word"}}>
                   {/*t(`${product._id}.product`)*/}
-                  {language == "pl" ? t(`${product._id}.product`) : product.product}
+                  {i18n.language == "pl" ? t(`${product._id}.product`) : product.product}
                 </h4>
                 <h4 className={classes.cardTitle} style={{textAlign:"center"}}>
                   { currently.length && price === "RUB" ? (product.price * currently[0].RUB).toFixed(0)
