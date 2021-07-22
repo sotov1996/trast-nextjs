@@ -37,7 +37,7 @@ function Products({ products, currently }) {
   }
   return (
     <div>
-      <span style={{paddingRight: "10px"}}>Валюта:</span>
+      <span style={{paddingRight: "10px"}}>{t(`curruntcly`)}</span>
       <select onChange={(e) => setPrice(e.target.value)} defaultValue="RUB">
             <option id="RUB">RUB</option>
             <option id="BYN">BYN</option>
