@@ -69,7 +69,7 @@ function Products({ products, currently }) {
                 }}>
                   <img height="auto" width="100%" src={`data:${product.images.contentType};base64,${product.images.img}`} />
                 </div>
-                <h4 className={classes.cardTitle} style={{textAlign:"center", minHeight: "81px", wordBreak: "break-all"}}>
+                <h4 className={classes.cardTitle} style={{textAlign:"center", minHeight: "81px", wordWrap: "break-word"}}>
                   {/*t(`${product._id}.product`)*/}
                   {language == "pl" ? t(`${product._id}.product`) : product.product}
                 </h4>
