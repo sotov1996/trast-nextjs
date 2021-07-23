@@ -100,10 +100,10 @@ const AdminTab = () => {
     { id: 'brend', label: 'Бренд', minWidth: 70 },
     { id: 'product', label: 'Товар', minWidth: 150 },
     { id: 'price', label: 'Цена, Евро.', minWidth: 50 },
-    { id: 'description', label: 'Описание', minWidth: 350 },
-    { id: 'logo', label: 'Картинка', minWidth: 170 },
-    { id: 'edit', label: '', minWidth: 50 },
-    { id: 'delete', label: '', minWidth: 50 }
+    { id: 'description', label: 'Описание', minWidth: 150 },
+    { id: 'logo', label: 'Картинка', minWidth: 150 },
+    { id: 'edit', label: '', minWidth: 20 },
+    { id: 'delete', label: '', minWidth: 20 }
   ];
 
   const API = "/api"
@@ -420,7 +420,7 @@ const AdminTab = () => {
                     <TableCell
                       key={column.id}
                       align={column.align}
-                      style={{ minWidth: column.minWidth }}
+                      style={{ maxWidth: `${column.minWidth}px` }}
                     >
                       {column.label}
                     </TableCell>
@@ -435,9 +435,9 @@ const AdminTab = () => {
                         const value = row[column.id];
                         return (
                           <TableCell className={classes.cell} key={column.id} align={column.align}>
-                            {column.id == "edit" ? <Button onClick={() => handleOpen(row)} variant="outlined" color="primary">Изменить</Button> :
-                              column.id == "delete" ? <Button onClick={(e) => deleteBrend(e, row._id)} variant="outlined" color="secondary">Удалить</Button> :
-                                <div style={{ width: `${column.minWidth}px`, whiteSpace: "pre-wrap", }}>{value}</div>}
+                            {column.id == "edit" ? <Button onClick={() => handleOpen(row)} size="small" variant="outlined" color="primary">Изменить</Button> :
+                              column.id == "delete" ? <Button onClick={(e) => deleteBrend(e, row._id)} size="small" variant="outlined" color="secondary">Удалить</Button> :
+                                <div style={{ maxWidth: `${column.minWidth}px`, whiteSpace: "pre-wrap", }}>{value}</div>}
                           </TableCell>
                         );
                       })}
@@ -500,10 +500,10 @@ export function AdminBrend({ classes, setAllBrend }) {
 
   const columns = [
     { id: 'brend', label: 'Бренд', minWidth: 100 },
-    { id: 'description', label: 'Описание', minWidth: 450 },
+    { id: 'description', label: 'Описание', minWidth: 250 },
     { id: 'logo', label: 'Картинка', minWidth: 100 },
-    { id: 'edit', label: '', minWidth: 100 },
-    { id: 'delete', label: '', minWidth: 100 },
+    { id: 'edit', label: '', minWidth: 30 },
+    { id: 'delete', label: '', minWidth: 30 },
   ];
 
   const API = "/api"
@@ -789,8 +789,8 @@ export function AdminBrend({ classes, setAllBrend }) {
                   const value = row[column.id];
                   return (
                     <TableCell style={{}} key={`${column.id}${row._id}`} align={column.align}>
-                      {column.id == "edit" ? <Button onClick={() => handleOpen(row)} variant="outlined" color="primary">Изменить</Button> :
-                        column.id == "delete" ? <Button onClick={() => deleteBrend(row._id)} variant="outlined" color="secondary">Удалить</Button> : value}
+                      {column.id == "edit" ? <Button onClick={() => handleOpen(row)} size="small" variant="outlined" color="primary">Изменить</Button> :
+                        column.id == "delete" ? <Button onClick={() => deleteBrend(row._id)} size="small" variant="outlined" color="secondary">Удалить</Button> : value}
                     </TableCell>
                   );
                 })}
