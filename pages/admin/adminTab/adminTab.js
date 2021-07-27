@@ -176,6 +176,7 @@ const AdminTab = () => {
   const handleOpen = (column = {}) => {
     setOpenForm(!openForm)
     setEditUser(column)
+    onSaveLogo(null)
   }
 
   const updateUser = async (e) => {
@@ -210,10 +211,14 @@ const AdminTab = () => {
         setOpenSnackbar(!openSnackbar)
         console.log(err);
       });
+      setEditUser({})
+      onSaveLogo(null)
   }
 
   const hendleAddBrend = () => {
     setOpenFormAdd(!openFormAdd)
+    setEditUser({})
+    onSaveLogo(null)
   }
 
   const deleteBrend = async (e, id) => {
@@ -555,6 +560,7 @@ export function AdminBrend({ classes, setAllBrend }) {
         setOpenSnackbar(!openSnackbar)
         console.log(err);
       });
+      setEditUser({})
   }
 
   const handleChange = (e) => {
@@ -572,6 +578,7 @@ export function AdminBrend({ classes, setAllBrend }) {
   const handleOpen = (column = {}) => {
     setOpenForm(!openForm)
     setEditUser(column)
+    onSaveLogo(null)
   }
 
   const updateUser = async (e) => {
@@ -593,6 +600,7 @@ export function AdminBrend({ classes, setAllBrend }) {
           setRows(newRows)
           setOpenForm(!openForm)
           setOpenSnackbar(!openSnackbar)
+          onSaveLogo(null)
           setSnackbar({ severity: "success", text: "Изменено" })
         } else {
           setSnackbar({ severity: "error", text: "Ошибка: выберите Файл" })
@@ -604,15 +612,24 @@ export function AdminBrend({ classes, setAllBrend }) {
         setOpenSnackbar(!openSnackbar)
         console.log(err);
       });
+      setEditUser({})
   }
 
   const hendleAddBrend = () => {
     setOpenFormAdd(!openFormAdd)
+    setEditUser({})
+    onSaveLogo(null)
+  }
+
+  const hendleOpenEditForm = () => {
+    setOpenForm(!openForm)
+    setEditUser({})
+    onSaveLogo(null)
   }
 
   const setEditForm = () => {
     return (
-      <Dialog className="dial" open={openForm} onClose={() => setOpenForm(!openForm)} aria-labelledby="form-dialog-title">
+      <Dialog className="dial" open={openForm} onClose={hendleOpenEditForm} aria-labelledby="form-dialog-title">
         <DialogTitle id="form-dialog-title">Изменить</DialogTitle>
         <DialogContent>
           <form style={{ marginBottom: 20 }}>
