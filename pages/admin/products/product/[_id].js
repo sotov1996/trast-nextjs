@@ -68,7 +68,7 @@ function Product({ product }) {
                     <GridItem xs={12} sm={12} md={4}>
                         <br />
                         <div className={classes.cardImage}>
-                        <img height="auto" width="100%" src={`data:${product[0].images.contentType};base64,${product[0].images.img}`} />
+                        <img height="350px" src={`data:${product[0].images.contentType};base64,${product[0].images.img}`} />
                         </div>
 
                     </GridItem>

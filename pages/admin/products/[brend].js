@@ -23,6 +23,14 @@ function Products({ products, currently }) {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(12);
   const [price, setPrice] = React.useState('RUB');
+  const [wind, setWind] = React.useState();
+
+  useEffect(() => {
+    if(window.innerWidth <= 1400){
+      return setWind(3)
+    }
+    return setWind(2)
+  }, [])
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -49,7 +57,7 @@ function Products({ products, currently }) {
         ).map(product =>
           <GridItem
             key={`${product._id}${product.brend}`}
-            xs={12} sm={6} md={2}
+            xs={12} sm={6} md={wind}
             onClick={() => router.push(`/admin/products/product/${product._id}`)}>
             <Card style={{cursor:"pointer", minHeight: "310px"}}>
               <CardHeader stats icon>
@@ -62,13 +70,13 @@ function Products({ products, currently }) {
                   display: "flex",
                   alignItems: "center"
                 }}>
-                  <img height="auto" width="100%" src={`data:${product.images.contentType};base64,${product.images.img}`} />
+                  <img height="170px" style={{margin: "0 auto"}} src={`data:${product.images.contentType};base64,${product.images.img}`} />
                 </div>
-                <h4 className={classes.cardTitle} style={{textAlign:"center", minHeight: "81px", wordWrap: "break-word"}}>
+                <h4 className={classes.cardTitle} style={{textAlign:"center", minHeight: "108px", wordWrap: "break-word"}}>
                   {/*t(`${product._id}.product`)*/}
                   {i18n.language == "pl" ? t(`${product._id}.product`) : product.product}
                 </h4>
-                <h4 className={classes.cardTitle} style={{textAlign:"center"}}>
+                <h4 className={classes.cardTitle} style={{textAlign:"center", fontWeight:"bold"}}>
                   { currently.length && price === "RUB" ? (product.price * currently[0].RUB).toFixed(0)
                     : currently.length && price === "BYN" ? (product.price * currently[0].BYN).toFixed(0)
                     : product.price
