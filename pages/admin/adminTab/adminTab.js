@@ -437,7 +437,7 @@ const AdminTab = () => {
                           <TableCell className={classes.cell} key={column.id} align={column.align}>
                             {column.id == "edit" ? <Button onClick={() => handleOpen(row)} size="small" variant="outlined" color="primary">Изменить</Button> :
                               column.id == "delete" ? <Button onClick={(e) => deleteBrend(e, row._id)} size="small" variant="outlined" color="secondary">Удалить</Button> :
-                                <div style={{ maxWidth: `${column.minWidth}px`, whiteSpace: "pre-wrap", }}>{value}</div>}
+                                <div style={{ maxWidth: `${column.minWidth}px`, whiteSpace: "pre-wrap", overflow: "hidden", height: "100px" }}>{value}</div>}
                           </TableCell>
                         );
                       })}
