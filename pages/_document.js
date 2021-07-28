@@ -9,8 +9,8 @@ class MyDocument extends Document {
         <Head>
           <meta charSet="utf-8" />
           <meta name="theme-color" content="#000000" />
-          <meta keywords="Торгово посредническая  деятельность  в   сфере оптовых  закупок  товаров  бытовой  химии  из  Польши" />
-          <meta keywords="Pośrednictwo handlowe w zakresie hurtowych zakupów chemii gospodarczej z Polski" />
+          <meta name="description" content="Торгово посредническая  деятельность  в   сфере оптовых  закупок  товаров  бытовой  химии  из  Польши" />
+          <meta name="description" content="Pośrednictwo handlowe w zakresie hurtowych zakupów chemii gospodarczej z Polski" />
           <meta keywords="Прямой  дилер,  нацеленный  на  поиск партнеров  в  области  закупок  и  поставок  товаров от  польских  производителей  в  России." />
           <meta keywords="Bezpośredni dealer poszukujący partnerów w zakupach i dostawach towarów od polskich producentów w Rosji." />
           <link rel="shortcut icon" href={require("../assets/img/logo_trast.png")} />
