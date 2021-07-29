@@ -98,13 +98,22 @@ const AdminTab = () => {
 
   const columns = [
     { id: 'brend', label: 'Бренд', minWidth: 70 },
+    { id: 'subcategory', label: 'Тип', minWidth: 70 },
     { id: 'product', label: 'Товар', minWidth: 150 },
     { id: 'price', label: 'Цена, Евро.', minWidth: 50 },
     { id: 'description', label: 'Описание', minWidth: 150 },
     { id: 'logo', label: 'Картинка', minWidth: 150 },
-    { id: 'edit', label: '', minWidth: 20 },
-    { id: 'delete', label: '', minWidth: 20 }
+    { id: 'button', label: '', minWidth: 20 }
   ];
+
+  const subcategory = [
+    { value: "Порошок(одежда)" },
+    { value: "Кондиционер(одежда)" },
+    { value: "Моющее(посуда)" },
+    { value: "Моющее(туалет)" },
+    { value: "Моющее(универсальное)" },
+    { value: "Моющее(окна)" }
+  ]
 
   const API = "/api"
 
@@ -130,12 +139,39 @@ const AdminTab = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if(!newUser.subcategory){
+      setSnackbar({ severity: "error", text: `Ошибка: выберите Тип` })
+      setOpenSnackbar(!openSnackbar)
+      return
+    }
+    if(!newUser.description){
+      setSnackbar({ severity: "error", text: `Ошибка: добавьте Описание` })
+      setOpenSnackbar(!openSnackbar)
+      return
+    }
+    if(!newUser.description){
+      setSnackbar({ severity: "error", text: `Ошибка: добавьте Описание` })
+      setOpenSnackbar(!openSnackbar)
+      return
+    }
+    if(!newUser.brend){
+      setSnackbar({ severity: "error", text: `Ошибка: выберите Бренд` })
+      setOpenSnackbar(!openSnackbar)
+      return
+    }
+    if(!saveLogo){
+      setSnackbar({ severity: "error", text: `Ошибка: добавьте Изображение` })
+      setOpenSnackbar(!openSnackbar)
+      return
+    }
+
     const formData = new FormData();
     formData.append("logo", saveLogo)
     formData.append('brend', newUser.brend);
     formData.append('description', newUser.description);
     formData.append('product', newUser.product);
     formData.append('price', newUser.price);
+    formData.append('subcategory', newUser.subcategory);
 
     await axios.post(`${API}/add`, formData)
       .then(res => {
@@ -188,6 +224,7 @@ const AdminTab = () => {
     formData.append('product', editUser.product);
     formData.append('price', editUser.price);
     formData.append('id', editUser._id);
+    formData.append('subcategory', editUser.subcategory);
 
     await axios.put(`${API}/update`, formData)
       .then(res => {
@@ -292,6 +329,22 @@ const AdminTab = () => {
                   </FormControl>
                 )
               }
+              if (column.id === 'subcategory') {
+                return (
+                  <FormControl variant="filled" className={classes.formControl}>
+                    <InputLabel id="demo-simple-select-label">Тип</InputLabel>
+                    <Select
+                      name={column.id}
+                      labelId="demo-simple-select-label"
+                      id="demo-simple-select"
+                      value={editUser[column.id]}
+                      onChange={handleUpdate}
+                    >
+                      {subcategory.map(( s,index) => <MenuItem key={index} value={s.value}>{s.value}</MenuItem>)}
+                    </Select>
+                  </FormControl>
+                )
+              }
               if (column.id == "price") {
                 return (
                   <TextField
@@ -311,7 +364,7 @@ const AdminTab = () => {
                   />
                 )
               }
-              if (column.id != 'edit' && column.id != 'logo' && column.id != 'delete') {
+              if (column.id != 'button' && column.id != 'logo') {
                 return (
                   <TextField
                     id="outlined-multiline-static"
@@ -361,8 +414,24 @@ const AdminTab = () => {
                       onChange={handleChange}
                     >
                       {allBrend.map( (brend, index) => {
-                        return <MenuItem value={brend}>{brend}</MenuItem>
+                        return <MenuItem key={index} value={brend}>{brend}</MenuItem>
                       })}
+                    </Select>
+                  </FormControl>
+                )
+              }
+              if (column.id === 'subcategory') {
+                return (
+                  <FormControl variant="filled" className={classes.formControl}>
+                    <InputLabel id="demo-simple-select-label">Тип</InputLabel>
+                    <Select
+                      name={column.id}
+                      labelId="demo-simple-select-label"
+                      id="demo-simple-select"
+                      value={editUser[column.id]}
+                      onChange={handleChange}
+                    >
+                      {subcategory.map(( s,index) => <MenuItem key={index} value={s.value}>{s.value}</MenuItem>)}
                     </Select>
                   </FormControl>
                 )
@@ -386,7 +455,7 @@ const AdminTab = () => {
                   />
                 )
               }
-              if (column.id != 'edit' && column.id != 'logo' && column.id != 'delete') {
+              if (column.id != 'button' && column.id != 'logo') {
                 return (
                   <TextField
                     id="outlined-multiline-static"
@@ -440,9 +509,13 @@ const AdminTab = () => {
                         const value = row[column.id];
                         return (
                           <TableCell className={classes.cell} key={column.id} align={column.align}>
-                            {column.id == "edit" ? <Button onClick={() => handleOpen(row)} size="small" variant="outlined" color="primary">Изменить</Button> :
-                              column.id == "delete" ? <Button onClick={(e) => deleteBrend(e, row._id)} size="small" variant="outlined" color="secondary">Удалить</Button> :
-                                <div style={{ maxWidth: `${column.minWidth}px`, whiteSpace: "pre-wrap", overflow: "hidden", height: "100px" }}>{value}</div>}
+                            {column.id == "button" ? 
+                              <div style={{ display: "block",  display: "flex", flexDirection: "column", width: "90px" }}>
+                                <Button style={{ marginBottom: "15px" }} onClick={() => handleOpen(row)} size="small" variant="outlined" color="primary">Изменить</Button>
+                                <Button onClick={(e) => deleteBrend(e, row._id)} size="small" variant="outlined" color="secondary">Удалить</Button>
+                              </div> 
+                              : <div style={{ maxWidth: `${column.minWidth}px`, whiteSpace: "pre-wrap", overflow: "hidden", height: "100px" }}>{value}</div>
+                            }
                           </TableCell>
                         );
                       })}

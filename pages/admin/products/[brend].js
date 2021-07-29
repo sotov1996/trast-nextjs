@@ -24,13 +24,37 @@ function Products({ products, currently }) {
   const [rowsPerPage, setRowsPerPage] = React.useState(12);
   const [price, setPrice] = React.useState('RUB');
   const [wind, setWind] = React.useState();
+  const [newprod, setNewProd] = React.useState([]);
 
   useEffect(() => {
+    getProduct(0)
     if(window.innerWidth <= 1400){
       return setWind(3)
     }
     return setWind(2)
   }, [])
+
+  const getProduct = async (index) => {
+    const subcategory = [
+      { value: "Порошок(одежда)" },
+      { value: "Кондиционер(одежда)" },
+      { value: "Моющее(посуда)" },
+      { value: "Моющее(туалет)" },
+      { value: "Моющее(универсальное)" },
+      { value: "Моющее(окна)" }
+    ]
+
+    const filterProd = (index) => {
+      if (index < subcategory.length) {
+        const prod = products.filter(p => p.subcategory == subcategory[index].value);
+        setNewProd(prev => [...prev,...prod])
+        return filterProd(index + 1);
+      }
+      setNewProd(prev => [...prev,...products.filter(p => !p.subcategory)])
+      return
+    }
+    filterProd(index)
+  }
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -40,20 +64,20 @@ function Products({ products, currently }) {
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
-  if(!products){
+  if(!newprod){
     return <><CircularProgress /></>
   }
   return (
     <div>
       <span style={{paddingRight: "10px"}}>{t(`curruntcly`)}</span>
-      <select onChange={(e) => setPrice(e.target.value)} defaultValue="RUB">
+      <select onChange={(e) => {setPrice(e.target.value); console.log("newprod", newprod)}} defaultValue="RUB">
             <option id="RUB">RUB</option>
             <option id="BYN">BYN</option>
           </select>
       <GridContainer>
         {(rowsPerPage > 0
-          ? products.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-          : products
+          ? newprod.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+          : newprod
         ).map(product =>
           <GridItem
             key={`${product._id}${product.brend}`}
@@ -92,7 +116,7 @@ function Products({ products, currently }) {
         <TablePagination
           rowsPerPageOptions={[ 12, 18, 24]}
           component="div"
-          count={products.length}
+          count={newprod.length}
           rowsPerPage={rowsPerPage}
           page={page}
           onChangePage={handleChangePage}
@@ -118,4 +142,5 @@ export async function getServerSideProps({ params }) {
   return {
     props: { products, currently }
   }
+
 }

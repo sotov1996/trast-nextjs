@@ -84,12 +84,14 @@ const upload = multer({ storage: storage });
 
 router.post("/add", upload.single('logo'), async (req, res) => {
     const thumb = new Buffer(fs.readFileSync(path.join(__dirname + '../../../assets/img/' + req.file.filename))).toString('base64')
+    
     try {
         const product = new Product({
             brend: req.body.brend,
             price: req.body.price,
             description: req.body.description,
             product: req.body.product,
+            subcategory: req.body.subcategory,
             logo: req.file.filename,
             images: {
                 img: thumb, 
@@ -113,7 +115,8 @@ router.put("/update", upload.single('logo'), async (req, res) => {
                 brend: req.body.brend,
                 price: req.body.price,
                 description: req.body.description,
-                product: req.body.product
+                product: req.body.product,
+                subcategory: req.body.subcategory
             }
         } else {
             const thumb = new Buffer(fs.readFileSync(path.join(__dirname + '../../../assets/img/' + req.file.filename))).toString('base64')
@@ -123,6 +126,7 @@ router.put("/update", upload.single('logo'), async (req, res) => {
                 description: req.body.description,
                 product: req.body.product,
                 logo: req.file.filename,
+                subcategory: req.body.subcategory,
                 images: {
                     img: thumb, 
                     contentType: req.file.mimetype

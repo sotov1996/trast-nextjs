@@ -10,7 +10,8 @@ const Product = new Schema({
     images: {
         img: String,
         contentType: String
-    }
+    },
+    subcategory: String
 })
 
 module.exports = mongoose.model("Product", Product)
