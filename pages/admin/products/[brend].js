@@ -101,8 +101,8 @@ function Products({ products, currently }) {
                   {i18n.language == "pl" ? t(`${product._id}.product`) : product.product}
                 </h4>
                 <h4 className={classes.cardTitle} style={{textAlign:"center", fontWeight:"bold"}}>
-                  { currently.length && price === "RUB" ? (product.price * currently[0].RUB).toFixed(0)
-                    : currently.length && price === "BYN" ? (product.price * currently[0].BYN).toFixed(0)
+                  { currently.length && price === "RUB" ? (product.price * currently[0].RUB).toFixed(2)
+                    : currently.length && price === "BYN" ? (product.price * currently[0].BYN).toFixed(2)
                     : product.price
                   } {price}
                 </h4>
