@@ -37,7 +37,7 @@ const Dashboard = ({ brends }) => {
                     position: 'relative',
                     width: '100%',
                     overflow: 'hidden',
-                    minHeight: "259px",
+                    height: "359px",
                     display: "flex",
                     alignItems: "center"
                   }}>
