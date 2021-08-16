@@ -26,7 +26,7 @@ class MyDocument extends Document {
           />
           <script src="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
           <script async src="https://www.googletagmanager.com/gtag/js?id=UA-204706469-1"></script>
-          <script danjerouslySetInnerHTML={{
+          <script dangerouslySetInnerHTML={{
             _html:`window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
