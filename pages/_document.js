@@ -41,6 +41,13 @@ class MyDocument extends Document {
             rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.css"
           />
+          <script async src="https://www.googletagmanager.com/gtag/js?id=UA-204706469-1"></script>
+          <script dangerouslySetInnerHTML={{
+            __html:`window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'UA-204706469-1');`}}
+          />
         </Head>
         <body>
           <div id="page-transition"></div>
