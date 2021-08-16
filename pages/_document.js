@@ -32,7 +32,6 @@ class MyDocument extends Document {
             gtag('js', new Date());
             gtag('config', 'UA-204706469-1');`}}
           />
-          <script src=""></script>
           <link
             rel="stylesheet"
             href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons"
